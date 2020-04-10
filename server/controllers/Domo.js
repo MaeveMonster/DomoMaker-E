@@ -58,13 +58,12 @@ const getDomos = (request, response) => {
 };
 
 const getHungriestDomo = (request, response) => {
-    const req = request;
-    const res = response;
-    
-    return Domo.DomoModel.find({}).sort({treats: 1}).exec(function(err, docs){
-        let hungriestDomo = docs[0];
-        return res.send({domos: [hungriestDomo]});
-    });
+  const res = response;
+
+  return Domo.DomoModel.find({}).sort({ treats: 1 }).exec((err, docs) => {
+    const hungriestDomo = docs[0];
+    return res.send({ domos: [hungriestDomo] });
+  });
 };
 
 module.exports.makerPage = makerPage;
