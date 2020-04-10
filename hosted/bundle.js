@@ -104,7 +104,7 @@ var loadHungriestDomo = function loadHungriestDomo() {
   sendAjax('GET', '/getHungriestDomo', null, function (data) {
     ReactDOM.render( /*#__PURE__*/React.createElement(DomoList, {
       domos: data.domos
-    }), document.querySelector("#domos"));
+    }), document.querySelector("#hungriestDomo"));
   });
 };
 
@@ -115,6 +115,9 @@ var setup = function setup(csrf) {
   ReactDOM.render( /*#__PURE__*/React.createElement(DomoList, {
     domos: []
   }), document.querySelector("#domos"));
+  ReactDOM.render( /*#__PURE__*/React.createElement(DomoList, {
+    domos: []
+  }), document.querySelector("#hungriestDomo"));
   loadDomosFromServer();
   loadHungriestDomo();
 };

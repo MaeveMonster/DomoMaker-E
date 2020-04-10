@@ -10,7 +10,7 @@ const handleDomo = (e) => {
     
     sendAjax('POST', $("domoForm").attr("action"), $("#domoForm").serialize(), function() {
         loadDomosFromServer();
-        //loadHungriestDomo();
+        loadHungriestDomo();
     });
     
     return false;
