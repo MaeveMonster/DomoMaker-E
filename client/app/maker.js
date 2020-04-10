@@ -59,7 +59,7 @@ const DomoList = function(props) {
     
     return (
         <div className="domoList">
-            <h2>Domo List:</h2>
+            <h2>My Domo List:</h2>
             {domoNodes}
         </div>
     );

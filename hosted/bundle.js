@@ -88,7 +88,7 @@ var DomoList = function DomoList(props) {
   });
   return (/*#__PURE__*/React.createElement("div", {
       className: "domoList"
-    }, /*#__PURE__*/React.createElement("h2", null, "Domo List:"), domoNodes)
+    }, /*#__PURE__*/React.createElement("h2", null, "My Domo List:"), domoNodes)
   );
 };
 
