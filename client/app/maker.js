@@ -10,6 +10,7 @@ const handleDomo = (e) => {
     
     sendAjax('POST', $("domoForm").attr("action"), $("#domoForm").serialize(), function() {
         loadDomosFromServer();
+        loadHungriestDomo();
     });
     
     return false;
@@ -71,6 +72,14 @@ const loadDomosFromServer = () => {
     });
 };
 
+const loadHungriestDomo = () => {
+    sendAjax('GET', '/getHungriestDomo', null, (data) => {
+        ReactDOM.render(
+            <DomoList domos={data.domos} />, document.querySelector("#domos")
+        );
+    });
+};
+
 const setup = function(csrf) {
     ReactDOM.render(
         <DomoForm csrf={csrf} />, document.querySelector("#makeDomo")
@@ -81,6 +90,7 @@ const setup = function(csrf) {
     );
     
     loadDomosFromServer();
+    loadHungriestDomo();
 };
 
 const getToken = () => {

@@ -13,6 +13,7 @@ var handleDomo = function handleDomo(e) {
 
   sendAjax('POST', $("domoForm").attr("action"), $("#domoForm").serialize(), function () {
     loadDomosFromServer();
+    loadHungriestDomo();
   });
   return false;
 };
@@ -99,6 +100,14 @@ var loadDomosFromServer = function loadDomosFromServer() {
   });
 };
 
+var loadHungriestDomo = function loadHungriestDomo() {
+  sendAjax('GET', '/getHungriestDomo', null, function (data) {
+    ReactDOM.render( /*#__PURE__*/React.createElement(DomoList, {
+      domos: data.domos
+    }), document.querySelector("#domos"));
+  });
+};
+
 var setup = function setup(csrf) {
   ReactDOM.render( /*#__PURE__*/React.createElement(DomoForm, {
     csrf: csrf
@@ -107,6 +116,7 @@ var setup = function setup(csrf) {
     domos: []
   }), document.querySelector("#domos"));
   loadDomosFromServer();
+  loadHungriestDomo();
 };
 
 var getToken = function getToken() {
