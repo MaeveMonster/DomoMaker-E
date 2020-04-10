@@ -59,6 +59,35 @@ const DomoList = function(props) {
     
     return (
         <div className="domoList">
+            <h2>Domo List:</h2>
+            {domoNodes}
+        </div>
+    );
+}
+
+const HungriestDomoList = function(props) {
+    if(props.domos.length === 0) {
+        return (
+            <div className="domoList">
+                <h3 className="emptyDomo">No Domos yet</h3>
+            </div>
+        );
+    }
+    
+    const domoNodes = props.domos.map(function(domo) {
+        return (
+            <div key={domo._id} className="domo">
+                <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
+                <h3 className="domoName"> Name: {domo.name} </h3>
+                <h3 className="domoAge"> Age: {domo.age} </h3>
+                <h3 className="domoTreats"> Treats: {domo.treats} </h3>
+            </div>
+        );
+    });
+    
+    return (
+        <div className="domoList">
+            <h2>World's Hungriest Domo:</h2>
             {domoNodes}
         </div>
     );
@@ -75,7 +104,7 @@ const loadDomosFromServer = () => {
 const loadHungriestDomo = () => {
     sendAjax('GET', '/getHungriestDomo', null, (data) => {
         ReactDOM.render(
-            <DomoList domos={data.domos} />, document.querySelector("#hungriestDomo")
+            <HungriestDomoList domos={data.domos} />, document.querySelector("#hungriestDomo")
         );
     });
 };
@@ -90,7 +119,7 @@ const setup = function(csrf) {
     );
     
     ReactDOM.render(
-        <DomoList domos={[]} />, document.querySelector("#hungriestDomo")
+        <HungriestDomoList domos={[]} />, document.querySelector("#hungriestDomo")
     );
     
     loadDomosFromServer();

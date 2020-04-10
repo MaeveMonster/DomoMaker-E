@@ -88,7 +88,40 @@ var DomoList = function DomoList(props) {
   });
   return (/*#__PURE__*/React.createElement("div", {
       className: "domoList"
-    }, domoNodes)
+    }, /*#__PURE__*/React.createElement("h2", null, "Domo List:"), domoNodes)
+  );
+};
+
+var HungriestDomoList = function HungriestDomoList(props) {
+  if (props.domos.length === 0) {
+    return (/*#__PURE__*/React.createElement("div", {
+        className: "domoList"
+      }, /*#__PURE__*/React.createElement("h3", {
+        className: "emptyDomo"
+      }, "No Domos yet"))
+    );
+  }
+
+  var domoNodes = props.domos.map(function (domo) {
+    return (/*#__PURE__*/React.createElement("div", {
+        key: domo._id,
+        className: "domo"
+      }, /*#__PURE__*/React.createElement("img", {
+        src: "/assets/img/domoface.jpeg",
+        alt: "domo face",
+        className: "domoFace"
+      }), /*#__PURE__*/React.createElement("h3", {
+        className: "domoName"
+      }, " Name: ", domo.name, " "), /*#__PURE__*/React.createElement("h3", {
+        className: "domoAge"
+      }, " Age: ", domo.age, " "), /*#__PURE__*/React.createElement("h3", {
+        className: "domoTreats"
+      }, " Treats: ", domo.treats, " "))
+    );
+  });
+  return (/*#__PURE__*/React.createElement("div", {
+      className: "domoList"
+    }, /*#__PURE__*/React.createElement("h2", null, "World's Hungriest Domo:"), domoNodes)
   );
 };
 
@@ -102,7 +135,7 @@ var loadDomosFromServer = function loadDomosFromServer() {
 
 var loadHungriestDomo = function loadHungriestDomo() {
   sendAjax('GET', '/getHungriestDomo', null, function (data) {
-    ReactDOM.render( /*#__PURE__*/React.createElement(DomoList, {
+    ReactDOM.render( /*#__PURE__*/React.createElement(HungriestDomoList, {
       domos: data.domos
     }), document.querySelector("#hungriestDomo"));
   });
@@ -115,7 +148,7 @@ var setup = function setup(csrf) {
   ReactDOM.render( /*#__PURE__*/React.createElement(DomoList, {
     domos: []
   }), document.querySelector("#domos"));
-  ReactDOM.render( /*#__PURE__*/React.createElement(DomoList, {
+  ReactDOM.render( /*#__PURE__*/React.createElement(HungriestDomoList, {
     domos: []
   }), document.querySelector("#hungriestDomo"));
   loadDomosFromServer();
