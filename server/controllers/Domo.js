@@ -63,7 +63,7 @@ const getHungriestDomo = (request, response) => {
     
     return Domo.DomoModel.find({}).sort({treats: 1}).exec(function(err, docs){
         let hungriestDomo = docs[0];
-        return res.send(hungriestDomo);
+        return res.send([hungriestDomo]);
     });
 };
 
